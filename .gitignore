@@ -1,0 +1,11 @@
+# Node.js
+backend/node_modules
+
+# Angular
+frontend/node_modules
+frontend/dist
+frontend/.angular
+
+# Environment files
+**/env.local.*
+**/.env

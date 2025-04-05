@@ -1,0 +1,11 @@
+<div class="container">
+  <h1>Mini Chatbot 🤖</h1>
+  <input
+    type="text"
+    [(ngModel)]="userMessage"
+    (keyup.enter)="sendMessage()"
+    placeholder="Write a message"
+  >
+  <button (click)="sendMessage()">Send</button>
+  <p><strong>Bot:</strong> {{botMessage}}</p>
+</div>
