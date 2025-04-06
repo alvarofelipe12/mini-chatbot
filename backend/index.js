@@ -17,9 +17,13 @@ io.on("connection", (socket) => {
   console.log("🟢 Connected User", socket.id);
 
   socket.on("user-message", (msg) => {
+    socket.emit("bot-typing");
+
     console.log("📩 User message");
-    const response = `Bot says: "${msg.toUpperCase()}"`;
-    socket.emit("bot-response", response);
+    setTimeout(() => {
+      const response = msg.toUpperCase();
+      socket.emit("bot-response", response);
+    }, 1000);
   });
 
   socket.on("disconnect", () => {

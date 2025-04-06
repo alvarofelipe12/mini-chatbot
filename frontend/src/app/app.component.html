@@ -1,11 +1,43 @@
 <div class="container">
   <h1>Mini Chatbot 🤖</h1>
+  <div
+    class="connection-error"
+    *ngIf="connectionError"
+  >
+    {{ connectionError }}
+  </div>
   <input
     type="text"
     [(ngModel)]="userMessage"
     (keyup.enter)="sendMessage()"
     placeholder="Write a message"
   >
-  <button (click)="sendMessage()">Send</button>
-  <p><strong>Bot:</strong> {{botMessage}}</p>
+  <button
+    (click)="sendMessage()"
+    [disabled]="!isConnected || !userMessage.trim()"
+  >Send</button>
+  <div class="chat-container">
+    <ng-container *ngFor="let chatElement of chatHistory">
+      <div
+        class="chat-bubble column"
+        [ngClass]="{'left': chatElement.user === 'human','right': chatElement.user === 'bot'}"
+      >
+        <p>
+          <strong>{{chatElement.user === 'human' ? 'You': 'Bot'}}:</strong> {{chatElement.message}}
+        </p>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="isTyping">
+      <!-- From https://codepen.io/bilalck/pen/jdGGNW -->
+      <div class="column right">
+        <div class="chat-bubble">
+          <div class="typing">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
 </div>
